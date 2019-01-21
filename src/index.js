@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import { routerForBrowser } from "redux-little-router";
+import 'semantic-ui-css/semantic.min.css'
 import reducers from "./redux/reducers";
 import ConnectedApp from "./connect";
 
