@@ -1,12 +1,43 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import thunk from "redux-thunk";
+import { createStore, applyMiddleware, compose, combineReducers } from "redux";
+import { routerForBrowser } from "redux-little-router";
+import reducers from "./redux/reducers";
+import ConnectedApp from "./connect";
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const routes = {
+  "/friends": {
+    title: "Friends"
+  },
+  '/friends/:id': {
+    title: 'Friend Something'
+  },
+  "/occasions": {
+    title: "Occasions"
+  },
+  "/occasions/:id": {
+    title: "Occasion Something"
+  },
+  "/": {
+    title: "Home"
+  }
+};
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.unregister();
+const { reducer, middleware, enhancer } = routerForBrowser({
+  routes
+});
+
+const store = createStore(
+  combineReducers({ router: reducer, reducers }),
+  {},
+  compose(enhancer, applyMiddleware(middleware, thunk))
+);
+
+ReactDOM.render(
+  <Provider store={store}>
+    <ConnectedApp routes={routes} />
+  </Provider>,
+  document.getElementById("root")
+);
