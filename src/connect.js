@@ -2,7 +2,8 @@ import { connect } from "react-redux";
 import {
   addFriend,
   addOccasion,
-  addGift
+  addGift,
+  showFriends
 } from "./redux/actions";
 import Gifter from "./client";
 
@@ -14,6 +15,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
+    showFriends: () => dispatch(showFriends()),
     addFriend: friend => dispatch(addFriend(friend)),
     addOccasion: occasion => dispatch(addOccasion(occasion)),
     addGift: gift => dispatch(addGift(gift)),

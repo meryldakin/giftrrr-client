@@ -2,7 +2,6 @@ import React from "react";
 import { Header, Icon, Modal, Button } from 'semantic-ui-react'
 
 const AddFriend = props => {
-  console.log(props)
   const { open, onClose } = props;
   return (
     <Modal
